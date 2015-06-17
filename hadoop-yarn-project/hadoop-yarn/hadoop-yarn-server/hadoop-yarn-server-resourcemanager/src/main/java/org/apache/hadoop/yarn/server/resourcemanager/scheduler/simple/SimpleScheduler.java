@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.apache.hadoop.yarn.server.resourcemanager.scheduler.fifo;
+package org.apache.hadoop.yarn.server.resourcemanager.scheduler.simple;
 
 import java.io.IOException;
 import java.util.ArrayList;
