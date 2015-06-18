@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package org.apache.hadoop.yarn.server.resourcemanager.scheduler.simple;
+package org.apache.hadoop.yarn.server.resourcemanager.scheduler.edftd;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -100,11 +100,11 @@ import com.google.common.annotations.VisibleForTesting;
 @LimitedPrivate("yarn")
 @Evolving
 @SuppressWarnings("unchecked")
-public class SimpleScheduler extends
+public class EDFTDScheduler extends
     AbstractYarnScheduler<FiCaSchedulerApp, FiCaSchedulerNode> implements
     Configurable {
 
-  private static final Log LOG = LogFactory.getLog(SimpleScheduler.class);
+  private static final Log LOG = LogFactory.getLog(EDFTDScheduler.class);
 
   private static final RecordFactory recordFactory = 
     RecordFactoryProvider.getRecordFactory(null);
@@ -202,8 +202,8 @@ public class SimpleScheduler extends
     }
   };
 
-  public SimpleScheduler() {
-    super(SimpleScheduler.class.getName());
+  public EDFTDScheduler() {
+    super(EDFTDScheduler.class.getName());
   }
 
   private synchronized void initScheduler(Configuration conf) {
@@ -842,7 +842,7 @@ public class SimpleScheduler extends
     }
   }
 
-  @Lock(SimpleScheduler.class)
+  @Lock(EDFTDScheduler.class)
   @Override
   protected synchronized void completedContainer(RMContainer rmContainer,
       ContainerStatus containerStatus, RMContainerEventType event) {
