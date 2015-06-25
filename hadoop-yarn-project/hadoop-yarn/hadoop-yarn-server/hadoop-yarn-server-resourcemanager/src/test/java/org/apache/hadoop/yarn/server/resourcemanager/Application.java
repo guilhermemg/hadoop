@@ -75,6 +75,8 @@ public class Application {
   final private ApplicationAttemptId applicationAttemptId;
   final private ResourceManager resourceManager;
   private final static RecordFactory recordFactory = RecordFactoryProvider.getRecordFactory(null);
+  private long deadline = 0;
+  
   
   final private Map<Priority, Resource> requestSpec = 
     new TreeMap<Priority, Resource>(
@@ -152,7 +154,8 @@ public class Application {
     ApplicationSubmissionContext context = recordFactory.newRecordInstance(ApplicationSubmissionContext.class);
     context.setApplicationId(this.applicationId);
     context.setQueue(this.queue);
-    
+    context.setDeadline(this.deadline);
+
     // Set up the container launch context for the application master
     ContainerLaunchContext amContainer
         = Records.newRecord(ContainerLaunchContext.class);
@@ -442,5 +445,13 @@ public class Application {
   private ContainerLaunchContext createCLC() {
     ContainerLaunchContext clc = recordFactory.newRecordInstance(ContainerLaunchContext.class);
     return clc;
+  }
+
+  public long getDeadline() {
+  	return deadline;
+  }
+
+  public void setDeadline(long deadline) {
+	this.deadline = deadline;
   }
 }

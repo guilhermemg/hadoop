@@ -535,4 +535,7 @@ public abstract class ApplicationSubmissionContext {
   @Public
   @Unstable
   public abstract void setReservationID(ReservationId reservationID);
+  
+  public abstract void setDeadline(long deadline);
+  public abstract long getDeadline();
 }

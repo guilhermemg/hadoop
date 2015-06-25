@@ -63,6 +63,7 @@ extends ApplicationSubmissionContext {
   private ResourceRequest amResourceRequest = null;
   private LogAggregationContext logAggregationContext = null;
   private ReservationId reservationId = null;
+  private long deadline = 0;
 
   public ApplicationSubmissionContextPBImpl() {
     builder = ApplicationSubmissionContextProto.newBuilder();
@@ -547,5 +548,12 @@ extends ApplicationSubmissionContext {
 
   private ReservationIdProto convertToProtoFormat(ReservationId t) {
     return ((ReservationIdPBImpl) t).getProto();
+  }
+  
+  public long getDeadline() {
+	  return this.deadline;
+  }
+  public void setDeadline(long deadline) {
+	  this.deadline = deadline;
   }
 }  
