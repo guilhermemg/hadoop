@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListMap;
 
@@ -972,5 +973,29 @@ public class Simple extends
 
   public Resource getUsedResource() {
     return usedResource;
+  }
+  
+  public Map<ApplicationId, Resource> getApplicationsResourceSReq() {
+    Map<ApplicationId, Resource> appResourcesInfo = new HashMap<ApplicationId, Resource>();
+	  for (Map.Entry<ApplicationId, SchedulerApplication<FiCaSchedulerApp>> e : applications
+	        .entrySet()) {
+		FiCaSchedulerApp application = e.getValue().getCurrentAppAttempt();
+	    if (application == null) {
+	      continue;
+	    }
+	    appResourcesInfo.put(e.getKey(), 
+	        application.getAMResource());
+	  }
+	  return appResourcesInfo;
+  }
+  
+  public Map<NodeId, Resource> getClusterAvailableResources() {
+    Map<NodeId, Resource> clusterResourcesInfo = new HashMap<NodeId, Resource>();
+    for (Entry<NodeId, FiCaSchedulerNode> e : nodes
+          .entrySet()) {
+      clusterResourcesInfo.put(e.getKey(), 
+          e.getValue().getAvailableResource());
+    }
+    return clusterResourcesInfo;
   }
 }
