@@ -162,6 +162,16 @@ public class JobContextImpl implements JobContext {
   public String getJobName() {
     return conf.getJobName();
   }
+  
+  /**
+   * Get the user-specified job deadline.
+   * 
+   * @return the job's deadline, defaulting to 10000.
+   */
+  public long getJobDeadline() {
+    return conf.getJobDeadline();
+  }
+  
 
   /**
    * Get the {@link InputFormat} class for the job.
@@ -451,5 +461,4 @@ public class JobContextImpl implements JobContext {
   public Credentials getCredentials() {
     return credentials;
   }
-  
 }

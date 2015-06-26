@@ -1006,6 +1006,17 @@ public class Job extends JobContextImpl implements JobContext {
     ensureState(JobState.DEFINE);
     conf.setJobName(name);
   }
+  
+  /**
+   * Set the user-specified job name.
+   * 
+   * @param name the job's new name.
+   * @throws IllegalStateException if the job is submitted
+   */
+  public void setJobDeadline(long deadline) throws IllegalStateException {
+    ensureState(JobState.DEFINE);
+    conf.setJobDeadline(deadline);
+  }
 
   /**
    * Turn speculative execution on or off for this job. 

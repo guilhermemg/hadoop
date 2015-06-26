@@ -318,4 +318,9 @@ class ChainReduceContextImpl<KEYIN, VALUEIN, KEYOUT, VALUEOUT> implements
   public float getProgress() {
     return base.getProgress();
   }
+
+  @Override
+  public long getJobDeadline() {
+    return base.getJobDeadline();
+  }
 }

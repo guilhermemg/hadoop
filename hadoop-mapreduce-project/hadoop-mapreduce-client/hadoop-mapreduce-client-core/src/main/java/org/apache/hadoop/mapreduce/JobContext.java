@@ -105,6 +105,13 @@ public interface JobContext extends MRJobConfig {
    * @return the job's name, defaulting to "".
    */
   public String getJobName();
+  
+  /**
+   * Get the user-specified job deadline.
+   * 
+   * @return the job's name, defaulting to 10000.
+   */
+  public long getJobDeadline();
 
   /**
    * Get the {@link InputFormat} class for the job.
@@ -316,5 +323,6 @@ public interface JobContext extends MRJobConfig {
    * @return the max number of attempts per reduce task.
    */
   public int getMaxReduceAttempts();
+  
 
 }

@@ -54,6 +54,8 @@ public interface MRJobConfig {
   public static final String ID = "mapreduce.job.id";
 
   public static final String JOB_NAME = "mapreduce.job.name";
+  
+  public static final String JOB_DEADLINE = "mapreduce.job.deadline";
 
   public static final String JAR_UNPACK_PATTERN = "mapreduce.job.jar.unpack.pattern";
 

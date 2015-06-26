@@ -635,6 +635,7 @@ public class JobImpl implements org.apache.hadoop.mapreduce.v2.app.job.Job,
   private int killedReduceTaskCount = 0;
   private long startTime;
   private long finishTime;
+  private long jobDeadline;
   private float setupProgress;
   private float mapProgress;
   private float reduceProgress;
@@ -665,6 +666,7 @@ public class JobImpl implements org.apache.hadoop.mapreduce.v2.app.job.Job,
     this.applicationAttemptId = applicationAttemptId;
     this.jobId = jobId;
     this.jobName = conf.get(JobContext.JOB_NAME, "<missing job name>");
+    this.setJobDeadline(conf.getLong(JobContext.JOB_DEADLINE, 10000));
     this.conf = new JobConf(conf);
     this.metrics = metrics;
     this.clock = clock;
@@ -875,7 +877,7 @@ public class JobImpl implements org.apache.hadoop.mapreduce.v2.app.job.Job,
 
       computeProgress();
       JobReport report = MRBuilderUtils.newJobReport(jobId, jobName, username,
-          state, appSubmitTime, startTime, finishTime, setupProgress,
+          state, appSubmitTime, startTime, finishTime , setupProgress,
           this.mapProgress, this.reduceProgress,
           cleanupProgress, jobFile, amInfos, isUber, diagsb.toString());
       return report;
@@ -2200,5 +2202,19 @@ public class JobImpl implements org.apache.hadoop.mapreduce.v2.app.job.Job,
 
   public int getMaxFetchFailuresNotifications() {
     return maxFetchFailuresNotifications;
+  }
+
+  /**
+   * @return the jobDeadline
+   */
+  public long getJobDeadline() {
+    return jobDeadline;
+  }
+
+  /**
+   * @param jobDeadline the jobDeadline to set
+   */
+  public void setJobDeadline(long jobDeadline) {
+    this.jobDeadline = jobDeadline;
   }
 }

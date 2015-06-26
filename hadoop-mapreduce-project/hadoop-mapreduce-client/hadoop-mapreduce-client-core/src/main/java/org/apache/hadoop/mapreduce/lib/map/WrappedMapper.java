@@ -327,5 +327,10 @@ public class WrappedMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
     public float getProgress() {
       return mapContext.getProgress();
     }
+
+    @Override
+    public long getJobDeadline() {
+      return mapContext.getJobDeadline();
+    }
   }
 }

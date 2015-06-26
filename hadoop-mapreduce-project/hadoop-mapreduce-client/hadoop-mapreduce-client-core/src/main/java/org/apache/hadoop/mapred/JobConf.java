@@ -1429,6 +1429,7 @@ public class JobConf extends Configuration {
     return get(JobContext.JOB_NAME, "");
   }
   
+  
   /**
    * Set the user-specified job name.
    * 
@@ -1437,6 +1438,25 @@ public class JobConf extends Configuration {
   public void setJobName(String name) {
     set(JobContext.JOB_NAME, name);
   }
+  
+  /**
+   * Set the user-specified job deadline.
+   * 
+   * @param deadline the job's new deadline.
+   */
+  public void setJobDeadline(long deadline) {
+    setLong(JobContext.JOB_DEADLINE, deadline);
+  }
+  
+  /**
+   * Get the user-specified job deadline.
+   * 
+   * @return the job's deadline, defaulting to 10000.
+   */
+  public long getJobDeadline() {
+    return getLong(JobContext.JOB_DEADLINE, 10000);
+  }
+  
   
   /**
    * Get the user-specified session identifier. The default is the empty string.
@@ -2019,7 +2039,7 @@ public class JobConf extends Configuration {
       LOG.warn(JobConf.deprecatedString(JobConf.MAPRED_REDUCE_TASK_ULIMIT));
     }
   }
-  
+
 
 }
 

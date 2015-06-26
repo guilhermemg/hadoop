@@ -196,6 +196,8 @@ public class ConfigUtil {
         MRJobConfig.ID),
       new DeprecationDelta("mapred.job.name",
         MRJobConfig.JOB_NAME),
+        new DeprecationDelta("mapred.job.deadline",
+            MRJobConfig.JOB_DEADLINE),
       new DeprecationDelta("mapred.job.priority",
         MRJobConfig.PRIORITY),
       new DeprecationDelta("mapred.job.queue.name",
