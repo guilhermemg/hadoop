@@ -363,6 +363,8 @@ public class EDFTDScheduler extends
         new SchedulerApplication<FiCaSchedulerApp>(DEFAULT_QUEUE, user);
     /* Grab application submission context for deadline */
     ApplicationSubmissionContext context = rmContext.getRMApps().get(applicationId).getApplicationSubmissionContext();
+    long deadline = context.getDeadline();
+    LOG.info("Deadline: " + deadline );
     this.ApplicationsSet.add(context);
     applications.put(applicationId, application);
     metrics.submitApp(user);
