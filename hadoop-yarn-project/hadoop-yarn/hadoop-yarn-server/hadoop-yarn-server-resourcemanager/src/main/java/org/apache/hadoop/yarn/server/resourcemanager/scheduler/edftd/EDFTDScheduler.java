@@ -361,7 +361,9 @@ public class EDFTDScheduler extends
       String queue, String user, boolean isAppRecovering) {
     SchedulerApplication<FiCaSchedulerApp> application =
         new SchedulerApplication<FiCaSchedulerApp>(DEFAULT_QUEUE, user);
-    this.ApplicationsSet.add(rmContext.getRMApps().get(applicationId).getApplicationSubmissionContext());
+    /* Grab application submission context for deadline */
+    ApplicationSubmissionContext context = rmContext.getRMApps().get(applicationId).getApplicationSubmissionContext();
+    this.ApplicationsSet.add(context);
     applications.put(applicationId, application);
     metrics.submitApp(user);
     LOG.info("Accepted application " + applicationId + " from user: " + user

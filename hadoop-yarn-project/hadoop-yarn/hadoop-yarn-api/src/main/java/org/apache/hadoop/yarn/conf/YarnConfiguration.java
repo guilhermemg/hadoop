@@ -42,6 +42,9 @@ public class YarnConfiguration extends Configuration {
   public static final String CS_CONFIGURATION_FILE= "capacity-scheduler.xml";
 
   @Private
+  public static final String RT_CONFIGURATION_FILE = "rt-scheduler.xml";
+
+  @Private
   public static final String HADOOP_POLICY_CONFIGURATION_FILE =
       "hadoop-policy.xml";
 
@@ -58,6 +61,7 @@ public class YarnConfiguration extends Configuration {
   public static final List<String> RM_CONFIGURATION_FILES =
       Collections.unmodifiableList(Arrays.asList(
           CS_CONFIGURATION_FILE,
+          RT_CONFIGURATION_FILE,
           HADOOP_POLICY_CONFIGURATION_FILE,
           YARN_SITE_CONFIGURATION_FILE,
           CORE_SITE_CONFIGURATION_FILE));
