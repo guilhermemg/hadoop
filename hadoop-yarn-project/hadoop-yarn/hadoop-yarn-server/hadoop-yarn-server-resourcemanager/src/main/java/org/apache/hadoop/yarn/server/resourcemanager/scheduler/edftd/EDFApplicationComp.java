@@ -9,7 +9,6 @@ public class EDFApplicationComp implements Comparator<ApplicationSubmissionConte
 	@Override
 	public int compare(ApplicationSubmissionContext o1,
 			ApplicationSubmissionContext o2) {
-      return o2.getDeadline() - o1.getDeadline();
+      return (int) (o1.getDeadline() - o2.getDeadline());
 	}
-
 }
