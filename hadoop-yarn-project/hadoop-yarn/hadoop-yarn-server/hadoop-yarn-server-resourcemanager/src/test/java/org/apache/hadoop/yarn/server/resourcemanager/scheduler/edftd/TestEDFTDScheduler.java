@@ -388,6 +388,7 @@ public class TestEDFTDScheduler {
     
     // Submit an application
     Application application_0 = new Application("user_0", resourceManager);
+    application_0.setDeadline(99);
     application_0.submit();
     
     application_0.addNodeManager(host_0, 1234, nm_0);
@@ -405,6 +406,7 @@ public class TestEDFTDScheduler {
        
     // Submit another application
     Application application_1 = new Application("user_1", resourceManager);
+    application_1.setDeadline(99);
     application_1.submit();
     
     application_1.addNodeManager(host_0, 1234, nm_0);

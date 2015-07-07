@@ -491,7 +491,12 @@ public class YARNRunner implements ClientProtocol {
     // Set up the ApplicationSubmissionContext
     ApplicationSubmissionContext appContext =
         recordFactory.newRecordInstance(ApplicationSubmissionContext.class);
-    appContext.setApplicationId(applicationId);                // ApplicationId
+    appContext.setApplicationId(applicationId);
+    // ApplicationId
+    long deadline = jobConf.getLong(MRJobConfig.JOB_DEADLINE, 
+        MRJobConfig.DEFAULT_JOB_DEADLINE);
+    LOG.info("On YARNRunner, JobDeadline: " + deadline);
+    appContext.setDeadline(deadline);
     appContext.setQueue(                                       // Queue name
         jobConf.get(JobContext.QUEUE_NAME,
         YarnConfiguration.DEFAULT_QUEUE_NAME));

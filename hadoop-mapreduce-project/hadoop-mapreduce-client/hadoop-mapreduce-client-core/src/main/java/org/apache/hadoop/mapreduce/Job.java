@@ -1008,9 +1008,9 @@ public class Job extends JobContextImpl implements JobContext {
   }
   
   /**
-   * Set the user-specified job name.
+   * Set the user-specified job deadline.
    * 
-   * @param name the job's new name.
+   * @param deadline the job's deadline.
    * @throws IllegalStateException if the job is submitted
    */
   public void setJobDeadline(long deadline) throws IllegalStateException {

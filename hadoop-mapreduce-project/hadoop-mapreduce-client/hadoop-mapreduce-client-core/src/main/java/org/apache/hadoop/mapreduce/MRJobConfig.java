@@ -56,7 +56,7 @@ public interface MRJobConfig {
   public static final String JOB_NAME = "mapreduce.job.name";
   
   public static final String JOB_DEADLINE = "mapreduce.job.deadline";
-
+  public static final long DEFAULT_JOB_DEADLINE = 10000;
   public static final String JAR_UNPACK_PATTERN = "mapreduce.job.jar.unpack.pattern";
 
   public static final String USER_NAME = "mapreduce.job.user.name";

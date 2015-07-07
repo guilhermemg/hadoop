@@ -74,6 +74,7 @@ public class WordCount {
     }
     Job job = Job.getInstance(conf, "word count");
     job.setJarByClass(WordCount.class);
+    job.setJobDeadline(9999);
     job.setMapperClass(TokenizerMapper.class);
     job.setCombinerClass(IntSumReducer.class);
     job.setReducerClass(IntSumReducer.class);
