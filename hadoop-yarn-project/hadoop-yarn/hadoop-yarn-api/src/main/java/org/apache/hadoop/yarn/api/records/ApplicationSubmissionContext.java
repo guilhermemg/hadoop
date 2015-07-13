@@ -72,7 +72,7 @@ public abstract class ApplicationSubmissionContext {
   @Public
   @Stable
   public static ApplicationSubmissionContext newInstance(
-      ApplicationId applicationId, String applicationName, String queue,
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
       Priority priority, ContainerLaunchContext amContainer,
       boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
       int maxAppAttempts, Resource resource, String applicationType,
@@ -100,16 +100,17 @@ public abstract class ApplicationSubmissionContext {
     amReq.setRelaxLocality(true);
     amReq.setNodeLabelExpression(amContainerLabelExpression);
     context.setAMContainerResourceRequest(amReq);
+    context.setDeadline(deadline);
     return context;
   }
   
   public static ApplicationSubmissionContext newInstance(
-      ApplicationId applicationId, String applicationName, String queue,
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
       Priority priority, ContainerLaunchContext amContainer,
       boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
       int maxAppAttempts, Resource resource, String applicationType,
       boolean keepContainers) {
-    return newInstance(applicationId, applicationName, queue, priority,
+    return newInstance(applicationId, deadline , applicationName, queue, priority,
         amContainer, isUnmanagedAM, cancelTokensWhenComplete, maxAppAttempts,
         resource, applicationType, keepContainers, null, null);
   }
@@ -117,11 +118,11 @@ public abstract class ApplicationSubmissionContext {
   @Public
   @Stable
   public static ApplicationSubmissionContext newInstance(
-      ApplicationId applicationId, String applicationName, String queue,
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
       Priority priority, ContainerLaunchContext amContainer,
       boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
       int maxAppAttempts, Resource resource, String applicationType) {
-    return newInstance(applicationId, applicationName, queue, priority,
+    return newInstance(applicationId, deadline, applicationName, queue, priority,
       amContainer, isUnmanagedAM, cancelTokensWhenComplete, maxAppAttempts,
       resource, applicationType, false, null, null);
   }
@@ -129,11 +130,11 @@ public abstract class ApplicationSubmissionContext {
   @Public
   @Stable
   public static ApplicationSubmissionContext newInstance(
-      ApplicationId applicationId, String applicationName, String queue,
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
       Priority priority, ContainerLaunchContext amContainer,
       boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
       int maxAppAttempts, Resource resource) {
-    return newInstance(applicationId, applicationName, queue, priority,
+    return newInstance(applicationId, deadline, applicationName, queue, priority,
       amContainer, isUnmanagedAM, cancelTokensWhenComplete, maxAppAttempts,
       resource, null);
   }
@@ -141,7 +142,7 @@ public abstract class ApplicationSubmissionContext {
   @Public
   @Stable
   public static ApplicationSubmissionContext newInstance(
-      ApplicationId applicationId, String applicationName, String queue,
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
       ContainerLaunchContext amContainer, boolean isUnmanagedAM,
       boolean cancelTokensWhenComplete, int maxAppAttempts,
       String applicationType, boolean keepContainers,
@@ -159,19 +160,20 @@ public abstract class ApplicationSubmissionContext {
     context.setKeepContainersAcrossApplicationAttempts(keepContainers);
     context.setNodeLabelExpression(appLabelExpression);
     context.setAMContainerResourceRequest(resourceRequest);
+    context.setDeadline(deadline);
     return context;
   }
 
   @Public
   @Stable
   public static ApplicationSubmissionContext newInstance(
-      ApplicationId applicationId, String applicationName, String queue,
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
       Priority priority, ContainerLaunchContext amContainer,
       boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
       int maxAppAttempts, Resource resource, String applicationType,
       boolean keepContainers, long attemptFailuresValidityInterval) {
     ApplicationSubmissionContext context =
-        newInstance(applicationId, applicationName, queue, priority,
+        newInstance(applicationId, deadline, applicationName, queue, priority,
           amContainer, isUnmanagedAM, cancelTokensWhenComplete, maxAppAttempts,
           resource, applicationType, keepContainers);
     context.setAttemptFailuresValidityInterval(attemptFailuresValidityInterval);
@@ -181,13 +183,13 @@ public abstract class ApplicationSubmissionContext {
   @Public
   @Stable
   public static ApplicationSubmissionContext newInstance(
-      ApplicationId applicationId, String applicationName, String queue,
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
       Priority priority, ContainerLaunchContext amContainer,
       boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
       int maxAppAttempts, Resource resource, String applicationType,
       boolean keepContainers, LogAggregationContext logAggregationContext) {
     ApplicationSubmissionContext context =
-        newInstance(applicationId, applicationName, queue, priority,
+        newInstance(applicationId, deadline, applicationName, queue, priority,
           amContainer, isUnmanagedAM, cancelTokensWhenComplete, maxAppAttempts,
           resource, applicationType, keepContainers);
     context.setLogAggregationContext(logAggregationContext);
@@ -210,6 +212,22 @@ public abstract class ApplicationSubmissionContext {
   @Stable
   public abstract void setApplicationId(ApplicationId applicationId);
 
+  /**
+   * Set the deadline <em>deadline</em>.
+   * @param deadline application deadline
+   */
+  @Public
+  @Stable
+  public abstract void setDeadline(long deadline);
+  
+  /**
+   * Get the application <em>deadline</em>.
+   * @return application deadline
+   */
+  @Public
+  @Stable
+  public abstract long getDeadline();
+  
   /**
    * Get the application <em>name</em>.
    * @return application name
@@ -535,7 +553,4 @@ public abstract class ApplicationSubmissionContext {
   @Public
   @Unstable
   public abstract void setReservationID(ReservationId reservationID);
-  
-  public abstract void setDeadline(long deadline);
-  public abstract long getDeadline();
 }

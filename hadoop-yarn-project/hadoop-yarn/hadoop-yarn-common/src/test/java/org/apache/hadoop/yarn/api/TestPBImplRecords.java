@@ -657,7 +657,7 @@ public class TestPBImplRecords {
         ApplicationSubmissionContextProto.class);
     
     ApplicationSubmissionContext ctx =
-        ApplicationSubmissionContext.newInstance(null, null, null, null, null,
+        ApplicationSubmissionContext.newInstance(null,0, null, null, null, null,
             false, false, 0, Resources.none(), null, false, null, null);
     
     Assert.assertNotNull(ctx.getResource());

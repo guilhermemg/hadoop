@@ -219,7 +219,7 @@ public abstract class QueueACLsTestBase {
         ContainerLaunchContext.newInstance(null, null, null, null, null, acls);
 
     ApplicationSubmissionContext appSubmissionContext =
-        ApplicationSubmissionContext.newInstance(applicationId,
+        ApplicationSubmissionContext.newInstance(applicationId,0,
           "applicationName", queueName, null, amContainerSpec, false, true, 1,
           resource, "applicationType");
     appSubmissionContext.setApplicationId(applicationId);

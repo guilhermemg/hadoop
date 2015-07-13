@@ -293,6 +293,7 @@ message ResourceBlacklistRequestProto {
 ////////////////////////////////////////////////////////////////////////
 message ApplicationSubmissionContextProto {
   optional ApplicationIdProto application_id = 1;
+  optional int64 deadline = 18 [default = 0];
   optional string application_name = 2 [default = "N/A"];
   optional string queue = 3 [default = "default"];
   optional PriorityProto priority = 4;

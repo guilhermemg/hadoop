@@ -74,7 +74,7 @@ public class WordCount {
     }
     Job job = Job.getInstance(conf, "word count");
     job.setJarByClass(WordCount.class);
-    job.setJobDeadline(9999);
+    job.setJobDeadline(1111);
     job.setMapperClass(TokenizerMapper.class);
     job.setCombinerClass(IntSumReducer.class);
     job.setReducerClass(IntSumReducer.class);
@@ -85,6 +85,22 @@ public class WordCount {
     }
     FileOutputFormat.setOutputPath(job,
       new Path(otherArgs[otherArgs.length - 1]));
-    System.exit(job.waitForCompletion(true) ? 0 : 1);
+    
+    
+    Job job2 = Job.getInstance(conf, "word count");
+    job2.setJarByClass(WordCount.class);
+    job2.setJobDeadline(2222);
+    job2.setMapperClass(TokenizerMapper.class);
+    job2.setReducerClass(IntSumReducer.class);
+    job2.setOutputKeyClass(Text.class);
+    job2.setOutputValueClass(IntWritable.class);
+    for (int i = 0; i < otherArgs.length - 1; ++i) {
+      FileInputFormat.addInputPath(job2, new Path(otherArgs[i]));
+    }
+    FileOutputFormat.setOutputPath(job2,
+      new Path(otherArgs[otherArgs.length - 1]));
+    job2.submit();
+    job.submit();
+    //System.exit(job.waitForCompletion(true) ? 0 : 1);
   }
 }

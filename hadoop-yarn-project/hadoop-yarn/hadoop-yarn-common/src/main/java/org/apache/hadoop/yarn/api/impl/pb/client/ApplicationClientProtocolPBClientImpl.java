@@ -144,6 +144,7 @@ import org.apache.hadoop.yarn.proto.YarnServiceProtos.ReservationDeleteRequestPr
 import org.apache.hadoop.yarn.proto.YarnServiceProtos.ReservationSubmissionRequestProto;
 import org.apache.hadoop.yarn.proto.YarnServiceProtos.ReservationUpdateRequestProto;
 import org.apache.hadoop.yarn.proto.YarnServiceProtos.SubmitApplicationRequestProto;
+import org.mortbay.log.Log;
 
 import com.google.protobuf.ServiceException;
 
@@ -232,6 +233,7 @@ public class ApplicationClientProtocolPBClientImpl implements ApplicationClientP
       IOException {
     SubmitApplicationRequestProto requestProto =
         ((SubmitApplicationRequestPBImpl) request).getProto();
+    Log.info("ApplicationClientProtocolPBClientImpl::submitApplication deadline:" + request.getApplicationSubmissionContext().getDeadline());
     try {
       return new SubmitApplicationResponsePBImpl(proxy.submitApplication(null,
         requestProto));

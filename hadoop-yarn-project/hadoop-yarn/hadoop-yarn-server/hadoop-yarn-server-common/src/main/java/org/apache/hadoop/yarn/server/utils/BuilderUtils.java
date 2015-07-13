@@ -350,13 +350,14 @@ public class BuilderUtils {
   }
   
   public static ApplicationSubmissionContext newApplicationSubmissionContext(
-      ApplicationId applicationId, String applicationName, String queue,
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
       Priority priority, ContainerLaunchContext amContainer,
       boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
       int maxAppAttempts, Resource resource, String applicationType) {
     ApplicationSubmissionContext context =
         recordFactory.newRecordInstance(ApplicationSubmissionContext.class);
     context.setApplicationId(applicationId);
+    context.setDeadline(deadline);
     context.setApplicationName(applicationName);
     context.setQueue(queue);
     context.setPriority(priority);
@@ -374,7 +375,17 @@ public class BuilderUtils {
       Priority priority, ContainerLaunchContext amContainer,
       boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
       int maxAppAttempts, Resource resource) {
-    return newApplicationSubmissionContext(applicationId, applicationName,
+    return newApplicationSubmissionContext(applicationId,0, applicationName,
+      queue, priority, amContainer, isUnmanagedAM, cancelTokensWhenComplete,
+      maxAppAttempts, resource, null);
+  }
+  //todel
+  public static ApplicationSubmissionContext newApplicationSubmissionContext(
+      ApplicationId applicationId, long deadline, String applicationName, String queue,
+      Priority priority, ContainerLaunchContext amContainer,
+      boolean isUnmanagedAM, boolean cancelTokensWhenComplete,
+      int maxAppAttempts, Resource resource) {
+    return newApplicationSubmissionContext(applicationId, deadline,applicationName,
       queue, priority, amContainer, isUnmanagedAM, cancelTokensWhenComplete,
       maxAppAttempts, resource, null);
   }

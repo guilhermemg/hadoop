@@ -106,7 +106,7 @@ public class EDFTDScheduler extends
     AbstractYarnScheduler<FiCaSchedulerApp, FiCaSchedulerNode> implements
     Configurable {
 
-  private Set ApplicationsSet = new TreeSet(new EDFApplicationComp());
+  private TreeSet<ApplicationSubmissionContext> applicationsSet = new TreeSet(new EDFApplicationComp());
   private static final Log LOG = LogFactory.getLog(EDFTDScheduler.class);
 
   private static final RecordFactory recordFactory = 
@@ -366,7 +366,7 @@ public class EDFTDScheduler extends
     ApplicationSubmissionContext context = rmContext.getRMApps().get(applicationId).getApplicationSubmissionContext();
     long deadline = context.getDeadline();
     LOG.info("Deadline: " + deadline );
-    this.ApplicationsSet.add(context);
+    this.applicationsSet.add(context);
     applications.put(applicationId, application);
     metrics.submitApp(user);
     LOG.info("Accepted application " + applicationId + " from user: " + user
@@ -473,9 +473,14 @@ public class EDFTDScheduler extends
         " #applications=" + applications.size());
 
     // Try to assign containers to applications in fifo order
-    for (Map.Entry<ApplicationId, SchedulerApplication<FiCaSchedulerApp>> e : applications
-        .entrySet()) {
-      FiCaSchedulerApp application = e.getValue().getCurrentAppAttempt();
+//    for (Map.Entry<ApplicationId, SchedulerApplication<FiCaSchedulerApp>> e : applications
+//        .entrySet()) {
+      for (ApplicationSubmissionContext asc : applicationsSet){
+        LOG.info("Processing deadline:" + asc.getDeadline());
+        SchedulerApplication<FiCaSchedulerApp> schedulerApp = 
+            applications.get(asc.getApplicationId());
+      
+      FiCaSchedulerApp application = schedulerApp.getCurrentAppAttempt();
       if (application == null) {
         continue;
       }

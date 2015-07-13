@@ -1270,7 +1270,7 @@ public class RMWebServices {
       throw new BadRequestException(error);
     }
     ApplicationSubmissionContext appContext =
-        ApplicationSubmissionContext.newInstance(appid,
+        ApplicationSubmissionContext.newInstance(appid,0,
           newApp.getApplicationName(), newApp.getQueue(),
           Priority.newInstance(newApp.getPriority()),
           createContainerLaunchContext(newApp), newApp.getUnmanagedAM(),

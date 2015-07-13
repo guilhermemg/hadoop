@@ -842,7 +842,7 @@ public class TestDelegationTokenRenewer {
             new HashMap<ApplicationAccessType, String>());
     ApplicationSubmissionContext appSubContext =
         ApplicationSubmissionContext.newInstance(
-            ApplicationId.newInstance(1234121, 0),
+            ApplicationId.newInstance(1234121, 0),0,
             "BOGUS", "default", Priority.UNDEFINED, amContainer, false,
             true, 1, Resource.newInstance(1024, 1), "BOGUS");
     SubmitApplicationRequest request =
