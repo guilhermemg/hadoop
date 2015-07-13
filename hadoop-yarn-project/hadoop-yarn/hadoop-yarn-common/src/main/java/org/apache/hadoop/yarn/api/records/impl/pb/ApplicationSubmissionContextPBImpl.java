@@ -192,6 +192,19 @@ extends ApplicationSubmissionContext {
   }
   
   @Override
+  public long getDeadline() {
+    ApplicationSubmissionContextProtoOrBuilder p = viaProto ? proto : builder;
+    return p.getDeadline();
+  }
+
+  @Override
+  public void setDeadline(
+      long deadline) {
+    maybeInitBuilder();
+    builder.setDeadline(deadline);
+  }
+  
+  @Override
   public String getApplicationName() {
     ApplicationSubmissionContextProtoOrBuilder p = viaProto ? proto : builder;
     if (!p.hasApplicationName()) {
@@ -548,12 +561,5 @@ extends ApplicationSubmissionContext {
 
   private ReservationIdProto convertToProtoFormat(ReservationId t) {
     return ((ReservationIdPBImpl) t).getProto();
-  }
-  
-  public long getDeadline() {
-	  return this.deadline;
-  }
-  public void setDeadline(long deadline) {
-	  this.deadline = deadline;
   }
 }  

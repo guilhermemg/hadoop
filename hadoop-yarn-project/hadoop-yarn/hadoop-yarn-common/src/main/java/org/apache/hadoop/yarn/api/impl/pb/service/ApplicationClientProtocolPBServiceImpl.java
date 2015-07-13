@@ -139,6 +139,7 @@ import org.apache.hadoop.yarn.proto.YarnServiceProtos.ReservationUpdateRequestPr
 import org.apache.hadoop.yarn.proto.YarnServiceProtos.ReservationUpdateResponseProto;
 import org.apache.hadoop.yarn.proto.YarnServiceProtos.SubmitApplicationRequestProto;
 import org.apache.hadoop.yarn.proto.YarnServiceProtos.SubmitApplicationResponseProto;
+import org.mortbay.log.Log;
 
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
@@ -215,6 +216,8 @@ public class ApplicationClientProtocolPBServiceImpl implements ApplicationClient
       SubmitApplicationRequestProto proto) throws ServiceException {
     SubmitApplicationRequestPBImpl request = new SubmitApplicationRequestPBImpl(proto);
     try {
+      Log.info("ApplicationClientProtocolPBServiceImpl::submitApplication deadline:" + 
+          request.getApplicationSubmissionContext().getDeadline());
       SubmitApplicationResponse response = real.submitApplication(request);
       return ((SubmitApplicationResponsePBImpl)response).getProto();
     } catch (YarnException e) {
