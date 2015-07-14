@@ -476,7 +476,6 @@ public class EDFTDScheduler extends
 //    for (Map.Entry<ApplicationId, SchedulerApplication<FiCaSchedulerApp>> e : applications
 //        .entrySet()) {
       for (ApplicationSubmissionContext asc : applicationsSet){
-        LOG.info("Processing deadline:" + asc.getDeadline());
         SchedulerApplication<FiCaSchedulerApp> schedulerApp = 
             applications.get(asc.getApplicationId());
       
@@ -505,6 +504,8 @@ public class EDFTDScheduler extends
             if (assignedContainers == 0) {
               break;
             }
+            LOG.info("Assinging resources to: " + asc.getApplicationId() + 
+                " Deadline: " + asc.getDeadline());
           }
         }
       }
@@ -586,7 +587,7 @@ public class EDFTDScheduler extends
     LOG.debug("assignContainersOnNode:" +
         " node=" + node.getRMNode().getNodeAddress() + 
         " application=" + application.getApplicationId().getId() +
-        " priority=" + priority.getPriority() + 
+        " priority=" + priority.getPriority() +
         " #assigned=" + 
         (nodeLocalContainers + rackLocalContainers + offSwitchContainers));
 
